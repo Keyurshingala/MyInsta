@@ -5,21 +5,18 @@ import dotenv from 'dotenv'
 import express from "express"
 import multer from "multer";
 import fileUpload from "express-fileupload";
-import path from 'path'
 
 import signup from "./Api/signup.js"
 import login from "./Api/login.js";
 import home from "./Api/home.js"
 import post from './Api/post.js'
+import file from "./Api/file.js";
 
 dotenv.config()
 
 const app = express()
 const port = process.env.SERVER_PORT
 console.log("222");
-
-
-console.log(path.resolve("images"));
 
 
 //for uploading file
@@ -38,9 +35,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(signup)
 app.use(login)
 
-
 app.use(home)
 app.use(post)
+app.use(file)
 
 
 app.listen(port, () => {

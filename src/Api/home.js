@@ -1,26 +1,22 @@
 import express from "express";
-import { verifyJwt } from "../services/webToken.js";
+import postCollection from "../models/postModel.js";
+import userCollection from "../models/signupModel.js";
 
 const home = new express.Router();
 
 home.get('/home', async (req, res) => {
     try {
         let auth = req.get("auth")
+        let user = await userCollection.findOne({ token: auth })
 
-        let isValid = await verifyJwt(auth)
+        if (user != null) {
+            let post = await postCollection.find()
 
-        if (isValid) {
-            
-            //post of following of user date wise
-        
-        
-            res.status(200).json("pass")
+            res.status(200).json(post)
 
         } else {
-            res.status(404).json("pass")
-
+            res.status(404).json("invalid credential")
         }
-
     } catch (e) {
         console.log(e);
         res.send(e)

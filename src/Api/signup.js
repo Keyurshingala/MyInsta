@@ -15,9 +15,9 @@ signup.post('/signup', async (req, res) => {
 
         const result = await userData.save()
 
-        console.log("res: ", result);
+        // console.log("res: ", result)
+        // console.log(res)
 
-        console.log(res);
         res.status(200).json({
             data: result
         })
