@@ -11,6 +11,8 @@ import login from "./Api/login.js";
 import home from "./Api/home.js"
 import post from './Api/post.js'
 import file from "./Api/file.js";
+import like from "./Api/like.js";
+import search from "./Api/search.js";
 
 dotenv.config()
 
@@ -38,6 +40,8 @@ app.use(login)
 app.use(home)
 app.use(post)
 app.use(file)
+app.use(like)
+app.use(search)
 
 
 app.listen(port, () => {

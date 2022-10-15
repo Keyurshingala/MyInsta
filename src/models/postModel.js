@@ -28,7 +28,7 @@ const postSchema = new mongoose.Schema({
         default: false
     },
 
-    like: [String],
+    like: [Object],
 
     comment: [String]
 
