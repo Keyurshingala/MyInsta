@@ -6,8 +6,6 @@ import postCollection from '../models/postModel.js';
 import userCollection from '../models/signupModel.js';
 
 
-
-
 const search = express.Router();
 
 

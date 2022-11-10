@@ -13,13 +13,12 @@ import post from './Api/post.js'
 import file from "./Api/file.js";
 import like from "./Api/like.js";
 import search from "./Api/search.js";
+import comment from "./Api/comment.js";
 
 dotenv.config()
 
 const app = express()
 const port = process.env.SERVER_PORT
-console.log("222");
-
 
 //for uploading file
 app.use(fileUpload())
@@ -41,8 +40,8 @@ app.use(home)
 app.use(post)
 app.use(file)
 app.use(like)
+app.use(comment)
 app.use(search)
-
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);

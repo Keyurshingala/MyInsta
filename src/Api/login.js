@@ -1,6 +1,7 @@
 import express from 'express';
 import userCollection from '../models/signupModel.js';
 import { verify } from '../services/hashPass.js';
+import { createJwt } from "../services/webToken.js";
 
 const login = new express.Router();
 
@@ -8,17 +9,25 @@ login.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        const result = await userCollection.findOne({ username: username })
+        let result = await userCollection.findOne({ username: username })
 
         // console.log(result);
-
 
         if (result !== null) {
 
             const isPassMatched = await verify(password, result.password)
             if (isPassMatched) {
+                let tkn = await createJwt(result.name)
 
-                res.status(200).json(result)
+                // result["token"]  = await createJwt(result.name)
+
+                console.log(result);
+                console.log(result.token);
+                let newJs = {
+                    ...result._doc,
+                    token: tkn
+                }
+                res.status(200).json(newJs)
             } else {
                 res.status(400).json({
                     error: `invalid login credentials`
@@ -32,7 +41,7 @@ login.post('/login', async (req, res) => {
         }
     } catch (error) {
         console.log("login error");
-        // console.log(error);
+        console.log(error);
 
         let msg
         switch (error.code) {

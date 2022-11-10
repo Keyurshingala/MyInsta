@@ -77,14 +77,7 @@ const userSchema = new mongoose.Schema({
     updatedAt: {
         type: Number,
         required: true,
-    },
-
-    tokens: [{
-        token: {
-            type: String,
-            required: true,
-        }
-    }]
+    }
 });
 
 userSchema.methods.generateAuthToken = async function () {
@@ -92,7 +85,7 @@ userSchema.methods.generateAuthToken = async function () {
 
         const token = await createJwt(this.name)
 
-        this.tokens = this.tokens.concat({ token: token })
+        // this.tokens = this.tokens.concat({ token: token })
 
     } catch (error) {
         console.log("erro genrating token");
