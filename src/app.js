@@ -43,6 +43,6 @@ app.use(like)
 app.use(comment)
 app.use(search)
 
-app.listen(port, () => {
+app.listen(3000, () => {
     console.log(`Listening on port ${port}`);
 })
