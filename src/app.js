@@ -14,6 +14,12 @@ import file from "./Api/file.js";
 import like from "./Api/like.js";
 import search from "./Api/search.js";
 import comment from "./Api/comment.js";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 dotenv.config()
 
@@ -32,6 +38,13 @@ app.use(express.json())
 //for w-www-encodedurl parsing
 app.use(express.urlencoded({ extended: true }))
 
+app.get('/test', (req, res) => {
+    var options = {
+        root: path.join(__dirname)
+    };
+    var fileName = 'abc.html';
+    res.sendFile(fileName, options);
+})
 
 app.use(signup)
 app.use(login)
