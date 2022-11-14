@@ -18,7 +18,7 @@ import comment from "./Api/comment.js";
 dotenv.config()
 
 const app = express()
-const port = process.env.SERVER_PORT
+const port = express.port || process.env.SERVER_PORT
 
 //for uploading file
 app.use(fileUpload())
